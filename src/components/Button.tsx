@@ -2,7 +2,7 @@ import React from "react";
 
 interface ButtonProps {
   text: string;
-  color: string; // "blue", "red", "green", etc.
+  color: string;
   onClick: () => void;
 }
 
@@ -14,7 +14,7 @@ const Button: React.FC<ButtonProps> = ({ text, color, onClick }) => {
       onClick={onClick}
     >
       {text}
-      {/* Black Stroke Effect */}
+     
       <div className="absolute inset-0 border-2 border-black rounded-md"></div>
     </button>
   );

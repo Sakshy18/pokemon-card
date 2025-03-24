@@ -11,7 +11,7 @@ const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_AN
 @Injectable()
 export class SupabaseService {
   async uploadImage(filePath: string) {
-    const fileName = path.basename(filePath); // Extracts the filename from path
+    const fileName = path.basename(filePath);  
     const fileBuffer = fs.readFileSync(filePath);
     const { data } = supabase
     .storage

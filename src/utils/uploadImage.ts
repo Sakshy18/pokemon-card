@@ -8,6 +8,6 @@ export const uploadImage = async (file: File) => {
     });
   
     const data = await response.json();
-    return data.imageUrl; // Supabase image URL
+    return data.imageUrl; 
   };
   

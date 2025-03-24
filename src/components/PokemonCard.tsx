@@ -5,11 +5,26 @@ import { motion } from "framer-motion";
 interface CardProps {
   name: string;
   image: string;
-  isWinner?: boolean;
   showResult: boolean;
+  scores: { finalScore1: number; finalScore2: number } | null;
+  isLeft?: boolean;
 }
 
-const Card: React.FC<CardProps> = ({ name, image, showResult, isWinner }) => {
+const getStarCount = (score: number) => {
+  if (score > 250) return 5;
+  if (score > 170) return 4;
+  if (score > 110) return 3;
+  if (score > 80) return 2;
+  return 1;
+};
+
+const Card: React.FC<CardProps> = ({ name, image, showResult, scores, isLeft }) => {
+  const finalScore = scores ? (isLeft ? scores.finalScore1 : scores.finalScore2) : 0;
+  const starCount = getStarCount(finalScore);
+
+
+  const isWinner = scores ? finalScore === Math.max(scores.finalScore1, scores.finalScore2) : false;
+
   return (
     <motion.div
       className="relative flex flex-col items-center"
@@ -26,7 +41,6 @@ const Card: React.FC<CardProps> = ({ name, image, showResult, isWinner }) => {
         </div>
       )}
 
-
       {/* Pokémon Card */}
       <div className="relative flex flex-col items-center bg-white rounded-2xl shadow-xl border-4 border-yellow-500 w-64 h-80">
         {/* Pokémon Name */}
@@ -37,9 +51,9 @@ const Card: React.FC<CardProps> = ({ name, image, showResult, isWinner }) => {
         {/* Pokémon Image */}
         <img src={image} alt={name} className="h-full w-full object-cover rounded-lg" />
 
-        {/* Star Ratings */}
+    
         <div className="absolute bottom-[-20px] flex gap-1 bg-white p-1 rounded-lg border-4 border-yellow-500">
-          {[...Array(3)].map((_, index) => (
+          {[...Array(starCount)].map((_, index) => (
             <img key={index} src={star} alt="Star" className="h-4 w-4" />
           ))}
         </div>
