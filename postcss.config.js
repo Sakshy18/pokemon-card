@@ -1,4 +1,4 @@
-export default {
+MdViewModule.exports= {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
