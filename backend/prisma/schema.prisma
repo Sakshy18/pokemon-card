@@ -15,4 +15,5 @@ model Pokemon {
   attack    Int
   defense   Int
   speed     Int
+  imageUrl  String?
 }
